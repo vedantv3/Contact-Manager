@@ -66,12 +66,11 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 //@desc Get current user info
-//@route GET /api/users/current
+//@route POST /api/users/current
 //@access private
 const currentUser = asyncHandler(async (req, res) => {
     // You may access the user information from the request object
-    const { id, username, email } = req.user;
-    res.json({ id, username, email });
+    res.json(req.user);
 });
 
 module.exports = { registerUser, loginUser, currentUser };

@@ -12,6 +12,7 @@ const validateToken = asyncHandler(async (req, res, next) => {
         res.status(401);
         throw new Error("User is not authorized");
     }
+    
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {
@@ -23,6 +24,10 @@ const validateToken = asyncHandler(async (req, res, next) => {
         req.user = decoded;
         next();
     });
+    if(!token){
+        res.status(401);
+        throw new Error("user is ot authorized or token is missing");
+    }
 });
 
-module.exports = validateToken;
+module.exports = { validateToken };
